@@ -137,7 +137,7 @@ const tick = () =>
         const x = particleGeometry.attributes.position.array[i3 + 0]
         particleGeometry.attributes.position.array[i3 + 1] = Math.cos(elapsedTime + x)
         const y = particleGeometry.attributes.position.array[i3 + 1]
-        particleGeometry.attributes.position.array[i3 + 2] = Math.tan(elapsedTime + y)
+        particleGeometry.attributes.position.array[i3 + 0] = Math.tan(elapsedTime + x)
     }
     particleGeometry.attributes.position.needsUpdate = true
 
