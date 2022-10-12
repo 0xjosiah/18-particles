@@ -19,7 +19,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particleTexture = textureLoader.load('/textures/particles/2.png')
+const particleTexture = textureLoader.load('/textures/particles/12.png')
 
 /**
  * Particles
@@ -134,7 +134,8 @@ const tick = () =>
     // particles.rotation.x = (elapsedTime * .5)
     for (let i = 0; i < count; i++) {
         const i3 = i * 3
-        particleGeometry.attributes.position.array[i3 + 1] = Math.sin(elapsedTime)
+        const x = particleGeometry.attributes.position.array[i3 + 0]
+        particleGeometry.attributes.position.array[i3 + 1] = Math.cos(elapsedTime + x)
     }
     particleGeometry.attributes.position.needsUpdate = true
 
