@@ -48,12 +48,20 @@ const particleMaterial = new THREE.PointsMaterial({
     alphaMap: particleTexture,
     transparent: true,
     // alphaTest: .001,
-    depthTest: false,
+    // depthTest: false, // typically only words with one color and one particle in scene, adding more colors/geometries will mess this up
+    depthWrite: false,
 })
 
 // Points
 const particles = new THREE.Points( particleGeometry, particleMaterial )
 scene.add(particles)
+
+// Test Box
+const box = new THREE.Mesh(
+    new THREE.BoxGeometry(),
+    new THREE.MeshBasicMaterial()
+)
+scene.add(box)
 
 /**
  * Sizes
