@@ -19,15 +19,41 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
+const particleTexture = textureLoader.load('/textures/particles/2.png')
 
 /**
- * Test cube
+ * Particles
  */
-const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial()
+// Geometry
+// const particleGeometry = new THREE.SphereGeometry(1, 32, 32)
+const particleGeometry = new THREE.BufferGeometry();
+const count = 5000;
+
+const positions = new Float32Array(count * 3)
+
+for (let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - .5) * 10
+}
+
+particleGeometry.setAttribute(
+    'position',
+    new THREE.BufferAttribute(positions, 3)
 )
-scene.add(cube)
+
+// Material
+const particleMaterial = new THREE.PointsMaterial({
+    size: .1,
+    sizeAttenuation: true, // adds perspective to particles, if close to cam - looks big, far - looks small
+    color: 0xff88cc,
+    alphaMap: particleTexture,
+    transparent: true,
+    // alphaTest: .001,
+    depthTest: false,
+})
+
+// Points
+const particles = new THREE.Points( particleGeometry, particleMaterial )
+scene.add(particles)
 
 /**
  * Sizes
