@@ -19,7 +19,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particleTexture = textureLoader.load('/textures/particles/12.png')
+const particleTexture = textureLoader.load('/textures/particles/8.png')
 
 /**
  * Particles
@@ -60,7 +60,7 @@ const particleMaterial = new THREE.PointsMaterial({
     // alphaTest: .001,
     // depthTest: false, // typically only words with one color and one particle in scene, adding more colors/geometries will mess this up
     depthWrite: false,
-    blending: THREE.AdditiveBlending, // this can impact performance
+    // blending: THREE.AdditiveBlending, // this can impact performance
     vertexColors: true,
 
 })
@@ -136,6 +136,8 @@ const tick = () =>
         const i3 = i * 3
         const x = particleGeometry.attributes.position.array[i3 + 0]
         particleGeometry.attributes.position.array[i3 + 1] = Math.cos(elapsedTime + x)
+        const y = particleGeometry.attributes.position.array[i3 + 1]
+        particleGeometry.attributes.position.array[i3 + 2] = Math.sin(elapsedTime + y)
     }
     particleGeometry.attributes.position.needsUpdate = true
 
